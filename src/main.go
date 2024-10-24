@@ -1,17 +1,18 @@
 package main
 
 import (
-	"fmt"
 	"log"
-	"os"
 
-	"github.com/joho/godotenv"
+	"github.com/elaurentium/exilium-blog-backend/src/routers"
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
+	router := gin.Default() // boot router with logger and recovery middlewares
+
+	routers.InitRouter(&router.RouterGroup)
+
+	if err := router.Run(":8080"); err != nil {
+		log.Fatal(err)
 	}
-	fmt.Println(os.Getenv("PORT"))
 }
