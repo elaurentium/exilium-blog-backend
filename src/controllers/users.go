@@ -2,8 +2,7 @@ package controllers
 
 import (
 	"fmt"
-
-	rest_err "github.com/elaurentium/exilium-blog-backend/src/configuration/Errors"
+	validation "github.com/elaurentium/exilium-blog-backend/src/configuration/Validation"
 	"github.com/elaurentium/exilium-blog-backend/src/models/request"
 	"github.com/gin-gonic/gin"
 )
@@ -18,7 +17,7 @@ func CreateUser(c*gin.Context) {
 	var userRequest request.UserRequest
 
 	if err := c.ShouldBindJSON(&userRequest); err != nil {
-		restErr := rest_err.NewBadRequestError(fmt.Sprintf("There are some incorrect filds, error=%s\n", err.Error()))
+		restErr := validation.ValidadeUserError(err)
 		c.JSON(restErr.Code, restErr)
 		return
 	}
