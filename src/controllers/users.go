@@ -4,18 +4,21 @@ import (
 	"net/http"
 
 	validation "github.com/elaurentium/exilium-blog-backend/src/configuration/Validation"
+	"github.com/elaurentium/exilium-blog-backend/src/models"
 	"github.com/elaurentium/exilium-blog-backend/src/models/request"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 )
 
-// GET
-func GetUserById(c *gin.Context) {}
+var logger, _ = zap.NewProduction()
 
-func GetUserByEmail(c *gin.Context) {}
+// GET
+func(uc *userControllerInterface) GetUserById(c *gin.Context) {}
+
+func(uc *userControllerInterface) GetUserByEmail(c *gin.Context) {}
 
 // POST
-func CreateUser(c *gin.Context) {
+func(uc *userControllerInterface) CreateUser(c *gin.Context) {
 	var userRequest request.UserRequest
 
 	if err := c.ShouldBindJSON(&userRequest); err != nil {
@@ -24,9 +27,9 @@ func CreateUser(c *gin.Context) {
 		return
 	}
 
-	domain := models.newUserDomain(userRequest.Email, userRequest.Password, userRequest.Name, userRequest.Age)
+	domain := models.NewUserDomain(userRequest.Email, userRequest.Password, userRequest.Name, userRequest.Age)
 
-	if err := domain.CreateUser(); err != nil {
+	if err := uc.service.CreateUser(domain); err != nil {
 		c.JSON(err.Code, err)
 		return
 	}
@@ -34,11 +37,11 @@ func CreateUser(c *gin.Context) {
 	logger.Info("User created succefully",
 		zap.String("Journey", "CreateUser"))
 
-	c.String(http.StatusOK)
+	c.JSON(http.StatusOK, "")
 }
 
 // DELETE
-func DeleteUser(c *gin.Context) {}
+func(uc *userControllerInterface) DeleteUser(c *gin.Context) {}
 
 // PUT
-func UpdateUser(c *gin.Context) {}
+func(uc *userControllerInterface) UpdateUser(c *gin.Context) {}
