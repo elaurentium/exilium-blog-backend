@@ -8,7 +8,6 @@ import (
 
 var logger, _ = zap.NewProduction()
 
-
 func (ud *userDomainService) CreateUser(userDomain models.UserDomainInterface) *rest_err.RestErr {
 	logger.Info("Init create user model", zap.String("Jorney", "CreateUser"))
 	userDomain.EncryptPassword()

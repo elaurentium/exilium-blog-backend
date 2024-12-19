@@ -3,11 +3,12 @@ package controllers
 import (
 	"github.com/elaurentium/exilium-blog-backend/src/models/service"
 	"github.com/gin-gonic/gin"
+	"go.mongodb.org/mongo-driver/v2/mongo"
 )
 
-func NewUserControllerInterface(service service.UserDomainService) UserControllerInterface {
+func NewUserControllerInterface(database *mongo.Database) UserControllerInterface {
 	return &userControllerInterface{
-		service,
+		database: database,
 	}
 }
 
@@ -20,5 +21,6 @@ type UserControllerInterface interface {
 }
 
 type userControllerInterface struct {
-	service service.UserDomainService
+	service  service.UserDomainService
+	database *mongo.Database
 }

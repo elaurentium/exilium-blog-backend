@@ -1,16 +1,17 @@
 package service
 
 import (
+	"github.com/HunCoding/meu-primeiro-crud-go/src/model/repository"
 	rest_err "github.com/elaurentium/exilium-blog-backend/src/configuration/Errors"
 	"github.com/elaurentium/exilium-blog-backend/src/models"
 )
 
 func NewUserDomainService() UserDomainService {
-	return &userDomainService{}
+	return &userDomainService{userRepository}
 }
 
 type userDomainService struct {
-	
+	userRepository repository.UserRepository
 }
 
 // Create interface

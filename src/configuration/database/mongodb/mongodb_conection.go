@@ -2,20 +2,24 @@ package mongodb
 
 import (
 	"context"
+	"os"
 
 	"go.mongodb.org/mongo-driver/v2/mongo"
 	"go.mongodb.org/mongo-driver/v2/mongo/options"
 )
 
-func InitConnection() {
-	ctx := context.Background()
-	client, err := mongo.Connect(options.Client().ApplyURI("mongodb://localhost:27017")) 
+func NewMongoDBConnection(ctx context.Context) (*mongo.Database, error) {
+	mongodb_uri := os.Getenv("MONGODB_URI")
+	mongodb_database := os.Getenv("MONGODB_USER_DB")
 
+	client, err := mongo.Connect(options.Client().ApplyURI(mongodb_uri))
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 
 	if err := client.Ping(ctx, nil); err != nil {
-		panic(err)
+		return nil, err
 	}
+
+	return client.Database(mongodb_database), nil
 }

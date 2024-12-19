@@ -13,12 +13,12 @@ import (
 var logger, _ = zap.NewProduction()
 
 // GET
-func(uc *userControllerInterface) GetUserById(c *gin.Context) {}
+func (uc *userControllerInterface) GetUserById(c *gin.Context) {}
 
-func(uc *userControllerInterface) GetUserByEmail(c *gin.Context) {}
+func (uc *userControllerInterface) GetUserByEmail(c *gin.Context) {}
 
 // POST
-func(uc *userControllerInterface) CreateUser(c *gin.Context) {
+func (uc *userControllerInterface) CreateUser(c *gin.Context) {
 	var userRequest request.UserRequest
 
 	if err := c.ShouldBindJSON(&userRequest); err != nil {
@@ -41,7 +41,7 @@ func(uc *userControllerInterface) CreateUser(c *gin.Context) {
 }
 
 // DELETE
-func(uc *userControllerInterface) DeleteUser(c *gin.Context) {}
+func (uc *userControllerInterface) DeleteUser(c *gin.Context) {}
 
 // PUT
-func(uc *userControllerInterface) UpdateUser(c *gin.Context) {}
+func (uc *userControllerInterface) UpdateUser(c *gin.Context) {}

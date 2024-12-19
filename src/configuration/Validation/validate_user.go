@@ -12,9 +12,9 @@ import (
 	en_translation "github.com/go-playground/validator/v10/translations/en"
 )
 
-var(
+var (
 	Validate = validator.New()
-	transl 	ut.Translator
+	transl   ut.Translator
 )
 
 func init() {
@@ -38,7 +38,7 @@ func ValidadeUserError(validation_err error) *rest_err.RestErr {
 		for _, i := range validation_err.(validator.ValidationErrors) {
 			cause := rest_err.Causes{
 				Message: i.Translate(transl),
-				Field: i.Field(),
+				Field:   i.Field(),
 			}
 
 			errorsCauses = append(errorsCauses, cause)

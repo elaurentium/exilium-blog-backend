@@ -7,10 +7,10 @@ import (
 
 // Domain cannot be exported !!
 type userDomain struct {
-	name string
-	email string
+	name     string
+	email    string
 	password string
-	age int8
+	age      int8
 }
 
 type UserDomainInterface interface {
@@ -27,16 +27,16 @@ func NewUserDomain(email, password, name string, age int8) UserDomainInterface {
 	return &userDomain{email, password, name, age}
 }
 
-func (ud* userDomain) GetEmail() string {
+func (ud *userDomain) GetEmail() string {
 	return ud.email
 }
-func (ud* userDomain) GetPassword() string {
+func (ud *userDomain) GetPassword() string {
 	return ud.password
 }
-func (ud* userDomain) GetName() string {
+func (ud *userDomain) GetName() string {
 	return ud.name
 }
-func (ud* userDomain) GetAge() int8{
+func (ud *userDomain) GetAge() int8 {
 	return ud.age
 }
 
